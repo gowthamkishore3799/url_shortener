@@ -9,9 +9,11 @@ const { insertUrlShortener, findUrlShortenerByUrl } = require('../models/db');
 
 router.post('/url', async(req, res)=>{
     try{
+    console.info('[Url Shortener] Url generation has started');
     const { url } = req.body;
     const tinyUrl = randomString.generate(5);
     await insertUrlShortener({ url, tinyUrl: tinyUrl });
+    console.info('[Url Shortener] Url generation has Ended', tinyUrl);
     return res.send({
       url,
       tinyUrl,
